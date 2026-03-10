@@ -9,6 +9,8 @@ export default function CreateBond({ sisterName }: { sisterName: string }) {
   const [status, setStatus] = useState('')
   const [statusType, setStatusType] = useState<'success' | 'error' | ''>('')
   const [loading, setLoading] = useState(false)
+  const [showCelebration, setShowCelebration] = useState(false)
+  const [bondedName, setBondedName] = useState('')
 
   const handleCreateBond = async () => {
     setLoading(true)
@@ -58,10 +60,11 @@ export default function CreateBond({ sisterName }: { sisterName: string }) {
       setStatus(bondError.message)
       setStatusType('error')
     } else {
-      setStatus(`🪢 Rakhi tied to ${brotherProfile.name} successfully!`)
-      setStatusType('success')
+      setBondedName(brotherProfile.name)
       setBrotherEmail('')
       setMessage('')
+      setShowCelebration(true)
+      setTimeout(() => setShowCelebration(false), 3500)
     }
     setLoading(false)
   }
@@ -220,9 +223,133 @@ export default function CreateBond({ sisterName }: { sisterName: string }) {
           background: linear-gradient(90deg, rgba(212,120,0,0.3), transparent);
         }
         .cb-dot { color: rgba(245,158,11,0.5); font-size: 0.6rem; }
+
+        /* ── Celebration Overlay ── */
+        .celebration-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 1000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: rgba(26,10,0,0.97);
+          animation: fadeInOverlay 0.3s ease forwards;
+        }
+
+        @keyframes fadeInOverlay {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .celebration-circle {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, rgba(200,80,0,0.3), rgba(245,158,11,0.3));
+          border: 3px solid #f59e0b;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+          box-shadow: 0 0 60px rgba(245,158,11,0.4), 0 0 120px rgba(245,158,11,0.15);
+        }
+
+        @keyframes popIn {
+          0% { transform: scale(0); opacity: 0; }
+          70% { transform: scale(1.15); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+
+        .celebration-checkmark {
+          font-size: 3.5rem;
+          animation: checkIn 0.4s ease 0.3s both;
+        }
+
+        @keyframes checkIn {
+          from { transform: scale(0) rotate(-30deg); opacity: 0; }
+          to { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .celebration-title {
+          font-family: 'Yatra One', cursive;
+          font-size: 1.8rem;
+          color: #f59e0b;
+          margin-top: 28px;
+          text-shadow: 0 0 30px rgba(245,158,11,0.5);
+          animation: slideUp 0.4s ease 0.5s both;
+          text-align: center;
+        }
+
+        .celebration-subtitle {
+          font-family: 'Hind', sans-serif;
+          font-size: 0.95rem;
+          color: rgba(255,200,100,0.5);
+          margin-top: 8px;
+          animation: slideUp 0.4s ease 0.65s both;
+          text-align: center;
+        }
+
+        @keyframes slideUp {
+          from { transform: translateY(16px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Confetti particles */
+        .confetti-wrap {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          overflow: hidden;
+        }
+
+        .confetti-piece {
+          position: absolute;
+          top: -10px;
+          width: 8px;
+          height: 8px;
+          border-radius: 2px;
+          animation: confettiFall linear forwards;
+        }
+
+        @keyframes confettiFall {
+          0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
       `}</style>
 
       <div className="cb-wrap">
+        {showCelebration && (
+          <div className="celebration-overlay">
+            {/* Confetti */}
+            <div className="confetti-wrap">
+              {[...Array(30)].map((_, i) => (
+                <div
+                  key={i}
+                  className="confetti-piece"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    background: ['#f59e0b','#c85000','#fb923c','#fbbf24','#fff8eb'][i % 5],
+                    width: `${6 + Math.random() * 8}px`,
+                    height: `${6 + Math.random() * 8}px`,
+                    animationDuration: `${2 + Math.random() * 2}s`,
+                    animationDelay: `${Math.random() * 0.8}s`,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Main content */}
+            <div className="celebration-circle">
+              <span className="celebration-checkmark">🪢</span>
+            </div>
+            <h2 className="celebration-title">Rakhi Tied!</h2>
+            <p className="celebration-subtitle">
+              Your bond with {bondedName} is now blessed ✦
+            </p>
+          </div>
+        )}
         <div className="cb-card">
           <h2 className="cb-title">🪢 Tie a Rakhi</h2>
           <p className="cb-subtitle">Enter your brother's email to create a sacred bond</p>
