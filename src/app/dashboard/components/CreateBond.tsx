@@ -342,7 +342,7 @@ export default function CreateBond({ sisterName }: { sisterName: string }) {
 
             {/* Main content */}
             <div className="celebration-circle">
-              <span className="celebration-checkmark">🪢</span>
+              <img src="/rakhi.png" alt="rakhi" style={{ width: '64px', height: 'auto', filter: 'drop-shadow(0 0 20px rgba(245,158,11,0.7))' }} />
             </div>
             <h2 className="celebration-title">Rakhi Tied!</h2>
             <p className="celebration-subtitle">
@@ -351,7 +351,10 @@ export default function CreateBond({ sisterName }: { sisterName: string }) {
           </div>
         )}
         <div className="cb-card">
-          <h2 className="cb-title">🪢 Tie a Rakhi</h2>
+          <h2 className="cb-title">
+            <img src="/rakhi.png" alt="rakhi" style={{ width: '28px', height: 'auto', display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />
+            Tie a Rakhi
+          </h2>
           <p className="cb-subtitle">Enter your brother's email to create a sacred bond</p>
 
           <div className="cb-decoration">
@@ -383,8 +386,14 @@ export default function CreateBond({ sisterName }: { sisterName: string }) {
             className="cb-btn"
             onClick={handleCreateBond}
             disabled={loading || !brotherEmail}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
           >
-            {loading ? 'Tying Rakhi...' : 'Tie Rakhi 🪢'}
+            {loading ? 'Tying Rakhi...' : (
+              <>
+                Tie Rakhi
+                <img src="/rakhi.png" alt="rakhi" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+              </>
+            )}
           </button>
 
           {status && (

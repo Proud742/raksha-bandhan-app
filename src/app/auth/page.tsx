@@ -311,52 +311,7 @@ export default function AuthPage() {
         <div className="card">
           <div className="header">
             <div className="rakhi-icon">
-              <svg className="rakhi-svg" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                
-                {/* Outer decorative ring - spinning */}
-                <g className="rakhi-outer-ring">
-                  {[...Array(12)].map((_, i) => (
-                    <ellipse
-                      key={i}
-                      cx="40" cy="8" rx="2.5" ry="5"
-                      fill="rgba(245,158,11,0.4)"
-                      transform={`rotate(${i * 30} 40 40)`}
-                    />
-                  ))}
-                </g>
-
-                {/* Middle ring */}
-                <circle cx="40" cy="40" r="26" stroke="rgba(212,120,0,0.5)" strokeWidth="1" fill="none" strokeDasharray="4 3"/>
-
-                {/* Thread dangles at bottom */}
-                <line x1="34" y1="64" x2="30" y2="76" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round"/>
-                <line x1="40" y1="65" x2="40" y2="78" stroke="#c85000" strokeWidth="1.5" strokeLinecap="round"/>
-                <line x1="46" y1="64" x2="50" y2="76" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round"/>
-
-                {/* Thread end beads */}
-                <circle cx="30" cy="77" r="2" fill="#f59e0b"/>
-                <circle cx="40" cy="79" r="2" fill="#c85000"/>
-                <circle cx="50" cy="77" r="2" fill="#f59e0b"/>
-
-                {/* Main circle (center piece) */}
-                <circle cx="40" cy="40" r="18" fill="rgba(180,60,0,0.3)" stroke="rgba(245,158,11,0.7)" strokeWidth="1.5"/>
-
-                {/* Inner petal design */}
-                {[...Array(8)].map((_, i) => (
-                  <ellipse
-                    key={i}
-                    cx="40" cy="27" rx="3" ry="6"
-                    fill="rgba(245,158,11,0.35)"
-                    transform={`rotate(${i * 45} 40 40)`}
-                  />
-                ))}
-
-                {/* Center gem */}
-                <circle cx="40" cy="40" r="7" fill="rgba(200,80,0,0.6)" stroke="#f59e0b" strokeWidth="1"/>
-                <circle cx="40" cy="40" r="3.5" fill="#f59e0b" opacity="0.9"/>
-                <circle cx="38" cy="38" r="1.2" fill="white" opacity="0.6"/>
-
-              </svg>
+              <img src="/rakhi.png" alt="rakhi" style={{ width: '100px', height: 'auto', filter: 'drop-shadow(0 0 16px rgba(245,158,11,0.5))', animation: 'pulse-glow 3s ease-in-out infinite' }} />
             </div>
             <h1 className="title">Raksha Bandhan</h1>
             <p className="subtitle">Celebrate the bond</p>

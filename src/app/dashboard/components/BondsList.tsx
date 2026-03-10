@@ -210,7 +210,10 @@ export default function BondsList({ userId }: { userId: string }) {
         {/* Sent bonds */}
         <div className="bl-section">
           <div className="bl-section-header">
-            <h2 className="bl-section-title sent">🪢 Rakhis I Tied</h2>
+            <h2 className="bl-section-title sent">
+              <img src="/rakhi.png" alt="rakhi" style={{ width: '24px', height: 'auto', display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />
+              Rakhis I Tied
+            </h2>
             <span className="bl-count">{sentBonds.length}</span>
           </div>
 

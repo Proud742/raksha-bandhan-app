@@ -312,7 +312,10 @@ export default function Dashboard() {
 
         {/* Navbar */}
         <nav className="navbar">
-          <span className="navbar-brand">🪢 Raksha Bandhan</span>
+          <span className="navbar-brand">
+            <img src="/rakhi.png" alt="rakhi" style={{ width: '28px', height: 'auto', display: 'inline', verticalAlign: 'middle', marginRight: '8px' }} />
+            Raksha Bandhan
+          </span>
           <div className="navbar-right">
             <div className="navbar-avatar">
               {profile.avatar_url
